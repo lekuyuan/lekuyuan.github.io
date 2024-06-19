@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Go学习大纲内容</title>
+    <link href="/2024/06/19/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/"/>
+    <url>/2024/06/19/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Go-容器"><a href="#Go-容器" class="headerlink" title="Go 容器"></a>Go 容器</h2><ul><li>数组</li><li>切片</li><li>映射Map</li><li>列表(链表) list</li></ul><h2 id="面向对象思想"><a href="#面向对象思想" class="headerlink" title="面向对象思想"></a>面向对象思想</h2><ul><li>结构体</li><li>接口</li><li>类型断言</li><li>函数挂载</li><li>鸭子类型</li></ul><h2 id="并发操作"><a href="#并发操作" class="headerlink" title="并发操作"></a>并发操作</h2><ul><li>goroutine</li><li>并发通信<ul><li>channel</li></ul></li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span>&#123;<br>    name <span class="hljs-type">string</span><br>    age <span class="hljs-type">int</span><br>    address <span class="hljs-type">string</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *Person)</span></span> eat(food <span class="hljs-type">string</span>) &#123;<br>    fmt.Println(p.name,<span class="hljs-string">&quot;正在吃&quot;</span>,food)<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2024/06/19/hello-world/"/>
     <url>/2024/06/19/hello-world/</url>
