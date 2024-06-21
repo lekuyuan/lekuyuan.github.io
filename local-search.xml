@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Protocol Buffers</title>
+    <link href="/2024/06/21/go/protocol_buffers/"/>
+    <url>/2024/06/21/go/protocol_buffers/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Go-Protocol-Buffers"><a href="#Go-Protocol-Buffers" class="headerlink" title="Go Protocol Buffers"></a>Go Protocol Buffers</h2><p class="note note-success">0.安装protoc编译器</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs txt"># github下载<br>地址：https://github.com/protocolbuffers/protobuf/releases<br>下载对应平台的二进制文件解压，并配置到环境变量中，方便调用此命令。<br>我的电脑是windows10-amd64的，所以下载的是protoc-3.7.0-win64.zip<br><br># 配置好环境变量后执行protoc命令是否有打印输出<br># 有命令提示help，代表就可以啦<br></code></pre></td></tr></table></figure><p class="note note-success">1.安装protoco-gen-go</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go install google.golang.org/protobuf/cmd/protoc-gen-go@latest<br></code></pre></td></tr></table></figure><p class="note note-success">2.编辑创建protoc文件</p><p>创建一个文件夹<code>helloproto</code>，创建文件<code>student.prto</code></p>    <div class="fold">      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-6ae3e036" role="button" aria-expanded="false" aria-controls="collapse-6ae3e036">        <div class="fold-arrow">▶</div>student.proto文件如下      </div>      <div class="fold-collapse collapse" id="collapse-6ae3e036">        <div class="fold-content">          <figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs protobuf">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;<br><span class="hljs-keyword">package</span> helloproto;<br><br><span class="hljs-keyword">option</span> go_package =<span class="hljs-string">&quot;.&quot;</span>;<br><br><span class="hljs-keyword">message </span><span class="hljs-title class_">Student</span> &#123;<br>    <span class="hljs-type">string</span> name = <span class="hljs-number">1</span>;<br>    <span class="hljs-type">bool</span> male = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">repeated</span> <span class="hljs-type">int32</span> scores = <span class="hljs-number">3</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>        </div>      </div>    </div><p class="note note-success">3.执行命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">protoc --go_out=. *.proto<br></code></pre></td></tr></table></figure><blockquote><p>也可以参考博客<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="https://blog.csdn.net/m0_52649917/article/details/121599809">[1]</span></a></sup>,进行配置。</p></blockquote><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://blog.csdn.net/m0_52649917/article/details/121599809">https://blog.csdn.net/m0_52649917/article/details/121599809</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>Go</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Go学习大纲内容</title>
     <link href="/2024/06/19/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/"/>
     <url>/2024/06/19/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</url>

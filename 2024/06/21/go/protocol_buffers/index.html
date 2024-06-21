@@ -16,16 +16,16 @@
   <meta name="author" content="Yeskip">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GO 作为天生具备并发优势的语言，并发操作实现原理以及容器有什么">
+    <meta name="description" content="GO rpc谷歌序列化高效编码协议protocol buffer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go学习大纲内容">
-<meta property="og:url" content="http://example.com/2024/06/19/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/index.html">
+<meta property="og:title" content="Protocol Buffers">
+<meta property="og:url" content="http://example.com/2024/06/21/go/protocol_buffers/index.html">
 <meta property="og:site_name" content="Yeskip&#39;s Blog">
-<meta property="og:description" content="GO 作为天生具备并发优势的语言，并发操作实现原理以及容器有什么">
+<meta property="og:description" content="GO rpc谷歌序列化高效编码协议protocol buffer">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/XqV2MRP%20-%20Imgur.png">
-<meta property="article:published_time" content="2024-06-19T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-19T16:42:18.302Z">
+<meta property="article:published_time" content="2024-06-21T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T02:36:19.335Z">
 <meta property="article:author" content="Yeskip">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
   
   
   
-  <title>Go学习大纲内容 - Yeskip&#39;s Blog</title>
+  <title>Protocol Buffers - Yeskip&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Go学习大纲内容"></span>
+            <span id="subtitle" data-typed-text="Protocol Buffers"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-19 10:00" pubdate>
-          2024年6月19日 上午
+        <time datetime="2024-06-21 10:00" pubdate>
+          2024年6月21日 上午
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          129 字
+          186 字
         
       </span>
     
@@ -270,54 +270,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Go学习大纲内容</h1>
+            <h1 id="seo-header">Protocol Buffers</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Go-容器"><a href="#Go-容器" class="headerlink" title="Go 容器"></a>Go 容器</h2><p class="note note-warning">标签</p>
+                <h2 id="Go-Protocol-Buffers"><a href="#Go-Protocol-Buffers" class="headerlink" title="Go Protocol Buffers"></a>Go Protocol Buffers</h2><p class="note note-success">0.安装protoc编译器</p>
 
-<ul>
-<li>数组</li>
-<li>切片</li>
-<li>映射Map</li>
-<li>列表(链表) list</li>
-</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs txt"># github下载<br>地址：https://github.com/protocolbuffers/protobuf/releases<br>下载对应平台的二进制文件解压，并配置到环境变量中，方便调用此命令。<br>我的电脑是windows10-amd64的，所以下载的是protoc-3.7.0-win64.zip<br><br># 配置好环境变量后执行protoc命令是否有打印输出<br># 有命令提示help，代表就可以啦<br></code></pre></td></tr></table></figure>
+
+<p class="note note-success">1.安装protoco-gen-go</p>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go install google.golang.org/protobuf/cmd/protoc-gen-go@latest<br></code></pre></td></tr></table></figure>
+
+<p class="note note-success">2.编辑创建protoc文件</p>
+
+<p>创建一个文件夹<code>helloproto</code>，创建文件<code>student.prto</code></p>
 
     <div class="fold">
-      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-14288bc0" role="button" aria-expanded="false" aria-controls="collapse-14288bc0">
-        <div class="fold-arrow">▶</div>代码演示
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-6ae3e036" role="button" aria-expanded="false" aria-controls="collapse-6ae3e036">
+        <div class="fold-arrow">▶</div>student.proto文件如下
       </div>
-      <div class="fold-collapse collapse" id="collapse-14288bc0">
+      <div class="fold-collapse collapse" id="collapse-6ae3e036">
         <div class="fold-content">
-          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String []args)</span> &#123;<br>	System.out.println(<span class="hljs-string">&quot;你好呀&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure><p class="note note-warning">说明：这是一个java的入口方法</p>
+          <figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs protobuf">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;<br><span class="hljs-keyword">package</span> helloproto;<br><br><span class="hljs-keyword">option</span> go_package =<span class="hljs-string">&quot;.&quot;</span>;<br><br><span class="hljs-keyword">message </span><span class="hljs-title class_">Student</span> &#123;<br>    <span class="hljs-type">string</span> name = <span class="hljs-number">1</span>;<br>    <span class="hljs-type">bool</span> male = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">repeated</span> <span class="hljs-type">int32</span> scores = <span class="hljs-number">3</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
         </div>
       </div>
     </div>
 
-<h2 id="面向对象思想"><a href="#面向对象思想" class="headerlink" title="面向对象思想"></a>面向对象思想</h2><ul>
-<li>结构体</li>
-<li>接口</li>
-<li>类型断言</li>
-<li>函数挂载</li>
-<li>鸭子类型</li>
-</ul>
-<h2 id="并发操作"><a href="#并发操作" class="headerlink" title="并发操作"></a>并发操作</h2><ul>
-<li>goroutine</li>
-<li>并发通信<ul>
-<li>channel</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span>&#123;<br>    name <span class="hljs-type">string</span><br>    age <span class="hljs-type">int</span><br>    address <span class="hljs-type">string</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *Person)</span></span> eat(food <span class="hljs-type">string</span>) &#123;<br>    fmt.Println(p.name,<span class="hljs-string">&quot;正在吃&quot;</span>,food)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p class="note note-success">3.执行命令</p>
 
-
-
-<p>论文，这是一难点<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="参考资料2">[2]</span></a></sup></p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>参考资料1
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>参考资料2
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span>这是对应的脚注
-<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">protoc --go_out=. *.proto<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>也可以参考博客<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="https://blog.csdn.net/m0_52649917/article/details/121599809">[1]</span></a></sup>,进行配置。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_52649917/article/details/121599809">https://blog.csdn.net/m0_52649917/article/details/121599809</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -362,8 +350,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Go学习大纲内容</div>
-      <div>http://example.com/2024/06/19/go学习大纲/</div>
+      <div>Protocol Buffers</div>
+      <div>http://example.com/2024/06/21/go/protocol_buffers/</div>
     </div>
     <div class="license-meta">
       
@@ -375,7 +363,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月19日</div>
+          <div>2024年6月21日</div>
         </div>
       
       
@@ -407,18 +395,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/21/go/protocol_buffers/" title="Protocol Buffers">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Protocol Buffers</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/19/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2024/06/19/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/" title="Go学习大纲内容">
+                        <span class="hidden-mobile">Go学习大纲内容</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
