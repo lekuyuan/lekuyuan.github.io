@@ -16,24 +16,24 @@
   <meta name="author" content="Yeskip">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GO rpc谷歌序列化高效编码协议protocol buffer">
+    <meta name="description" content="Telegraf作为go语言编写的采集器，并采用插件思想架构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Protocol Buffers">
-<meta property="og:url" content="http://example.com/2024/06/21/go/protocol_buffers/index.html">
+<meta property="og:title" content="telegraf采集类型说明">
+<meta property="og:url" content="http://example.com/2024/07/14/monitor/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/index.html">
 <meta property="og:site_name" content="Yeskip&#39;s Blog">
-<meta property="og:description" content="GO rpc谷歌序列化高效编码协议protocol buffer">
+<meta property="og:description" content="Telegraf作为go语言编写的采集器，并采用插件思想架构">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/OJQpnr0%20-%20Imgur.png">
-<meta property="article:published_time" content="2024-06-21T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-21T02:43:23.341Z">
+<meta property="og:image" content="http://example.com/img/XqV2MRP%20-%20Imgur.png">
+<meta property="article:published_time" content="2024-07-14T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-14T01:06:02.829Z">
 <meta property="article:author" content="Yeskip">
-<meta property="article:tag" content="Go">
+<meta property="article:tag" content="Telegraf">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/OJQpnr0%20-%20Imgur.png">
+<meta name="twitter:image" content="http://example.com/img/XqV2MRP%20-%20Imgur.png">
   
   
   
-  <title>Protocol Buffers - Yeskip&#39;s Blog</title>
+  <title>telegraf采集类型说明 - Yeskip&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,13 +193,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/ghaqR1L%20-%20Imgur.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/aD45sev%20-%20Imgur%20.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Protocol Buffers"></span>
+            <span id="subtitle" data-typed-text="telegraf采集类型说明"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-21 10:00" pubdate>
-          2024年6月21日 上午
+        <time datetime="2024-07-14 10:00" pubdate>
+          2024年7月14日 上午
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          186 字
+          213 字
         
       </span>
     
@@ -270,42 +270,21 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Protocol Buffers</h1>
+            <h1 id="seo-header">telegraf采集类型说明</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Go-Protocol-Buffers"><a href="#Go-Protocol-Buffers" class="headerlink" title="Go Protocol Buffers"></a>Go Protocol Buffers</h2><p class="note note-success">0.安装protoc编译器</p>
+                <h2 id="1-untyped-、-summary-、-histogram、counter、以及gauge-都是用于什么场景下？"><a href="#1-untyped-、-summary-、-histogram、counter、以及gauge-都是用于什么场景下？" class="headerlink" title="1. untyped 、 summary 、 histogram、counter、以及gauge 都是用于什么场景下？"></a>1. untyped 、 summary 、 histogram、counter、以及gauge 都是用于什么场景下？</h2><p class="note note-warning">说明</p>
 
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs txt"># github下载<br>地址：https://github.com/protocolbuffers/protobuf/releases<br>下载对应平台的二进制文件解压，并配置到环境变量中，方便调用此命令。<br>我的电脑是windows10-amd64的，所以下载的是protoc-3.7.0-win64.zip<br><br># 配置好环境变量后执行protoc命令是否有打印输出<br># 有命令提示help，代表就可以啦<br></code></pre></td></tr></table></figure>
+<ol>
+<li>Untyped：适用于未知类型的数据，可以将任何类型的数据作为指标值。</li>
+<li>Summary：适用于度量数据的分布情况，例如响应时间、延迟等。可以计算数据的平均值、中位数、标准偏差等。</li>
+<li>Histogram：适用于度量数据的分布情况，例如请求大小、响应大小等。可以将数据分成不同的桶，然后计算每个桶中数据的数量和百分比。</li>
+<li>Counter：适用于计数器，例如请求数、错误数等。可以记录数据的增量，然后计算总数。</li>
+<li>Gauge：适用于记录当前数值的数据，例如CPU使用率、内存使用率等。可以记录数据的实时状态，然后进行监控和报警。</li>
+</ol>
 
-<p class="note note-success">1.安装protoco-gen-go</p>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go install google.golang.org/protobuf/cmd/protoc-gen-go@latest<br></code></pre></td></tr></table></figure>
-
-<p class="note note-success">2.编辑创建protoc文件</p>
-
-<p>创建一个文件夹<code>helloproto</code>，创建文件<code>student.prto</code></p>
-
-    <div class="fold">
-      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-6ae3e036" role="button" aria-expanded="false" aria-controls="collapse-6ae3e036">
-        <div class="fold-arrow">▶</div>student.proto文件如下
-      </div>
-      <div class="fold-collapse collapse" id="collapse-6ae3e036">
-        <div class="fold-content">
-          <figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs protobuf">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;<br><span class="hljs-keyword">package</span> helloproto;<br><br><span class="hljs-keyword">option</span> go_package =<span class="hljs-string">&quot;.&quot;</span>;<br><br><span class="hljs-keyword">message </span><span class="hljs-title class_">Student</span> &#123;<br>    <span class="hljs-type">string</span> name = <span class="hljs-number">1</span>;<br>    <span class="hljs-type">bool</span> male = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">repeated</span> <span class="hljs-type">int32</span> scores = <span class="hljs-number">3</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-        </div>
-      </div>
-    </div>
-
-<p class="note note-success">3.执行命令</p>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">protoc --go_out=. *.proto<br></code></pre></td></tr></table></figure>
-<blockquote>
-<p>也可以参考博客<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="https://blog.csdn.net/m0_52649917/article/details/121599809">[1]</span></a></sup>,进行配置。</p>
-</blockquote>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_52649917/article/details/121599809">https://blog.csdn.net/m0_52649917/article/details/121599809</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -323,7 +302,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Go/" class="category-chain-item">Go</a>
+  <a href="/categories/Telegraf/" class="category-chain-item">Telegraf</a>
   
   
 
@@ -338,7 +317,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Go/" class="print-no-link">#Go</a>
+        <a href="/tags/Telegraf/" class="print-no-link">#Telegraf</a>
       
     </div>
   
@@ -350,8 +329,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Protocol Buffers</div>
-      <div>http://example.com/2024/06/21/go/protocol_buffers/</div>
+      <div>telegraf采集类型说明</div>
+      <div>http://example.com/2024/07/14/monitor/go学习大纲/</div>
     </div>
     <div class="license-meta">
       
@@ -363,7 +342,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月21日</div>
+          <div>2024年7月14日</div>
         </div>
       
       
@@ -395,18 +374,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/14/monitor/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/" title="telegraf采集类型说明">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">telegraf采集类型说明</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/19/go/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/" title="Go学习大纲内容">
-                        <span class="hidden-mobile">Go学习大纲内容</span>
+                      <a href="/2024/06/21/go/protocol_buffers/" title="Protocol Buffers">
+                        <span class="hidden-mobile">Protocol Buffers</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

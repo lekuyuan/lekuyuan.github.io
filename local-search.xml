@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>telegraf采集类型说明</title>
+    <link href="/2024/07/14/monitor/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/"/>
+    <url>/2024/07/14/monitor/go%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</url>
+    
+    <content type="html"><![CDATA[<h2 id="1-untyped-、-summary-、-histogram、counter、以及gauge-都是用于什么场景下？"><a href="#1-untyped-、-summary-、-histogram、counter、以及gauge-都是用于什么场景下？" class="headerlink" title="1. untyped 、 summary 、 histogram、counter、以及gauge 都是用于什么场景下？"></a>1. untyped 、 summary 、 histogram、counter、以及gauge 都是用于什么场景下？</h2><p class="note note-warning">说明</p><ol><li>Untyped：适用于未知类型的数据，可以将任何类型的数据作为指标值。</li><li>Summary：适用于度量数据的分布情况，例如响应时间、延迟等。可以计算数据的平均值、中位数、标准偏差等。</li><li>Histogram：适用于度量数据的分布情况，例如请求大小、响应大小等。可以将数据分成不同的桶，然后计算每个桶中数据的数量和百分比。</li><li>Counter：适用于计数器，例如请求数、错误数等。可以记录数据的增量，然后计算总数。</li><li>Gauge：适用于记录当前数值的数据，例如CPU使用率、内存使用率等。可以记录数据的实时状态，然后进行监控和报警。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Telegraf</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Telegraf</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Protocol Buffers</title>
     <link href="/2024/06/21/go/protocol_buffers/"/>
     <url>/2024/06/21/go/protocol_buffers/</url>
